@@ -8,14 +8,21 @@ def inicio_view(self):
     user= Familia(nombre='Leandra',apellido='Cobos', fecha='1994-12-17')
     user.save()
     userTexto= f'Nombre: {user.nombre}, Apellido: {user.apellido}, Nacimiento: {user.fecha}'
-    return HttpResponse(userTexto)
-
-def probandoTemplate(xx):
     mihtml=open(r'C:\Users\Steffany Cobos\Desktop\python_proyecto\proyectoFinal\AppCoder\templates\padre.html')
     html_read= Template(mihtml.read())
 
     mihtml.close()
-    miContexto= Context()
+    miContexto= Context(user)
+    documento=html_read.render(miContexto)
+    return HttpResponse(documento)
+
+def probandoTemplate(xx):
+    user= Familia(nombre='Leandra',apellido='Cobos', fecha='1994-12-17')
+    mihtml=open(r'C:\Users\Steffany Cobos\Desktop\python_proyecto\proyectoFinal\AppCoder\templates\padre.html')
+    html_read= Template(mihtml.read())
+
+    mihtml.close()
+    miContexto= Context(user)
     documento=html_read.render(miContexto)
     return HttpResponse(documento)
  
