@@ -4,25 +4,27 @@ from django.template import Template, Context
 from AppCoder.models import Familia
 
 # Create your views here.
-def inicio_view(self):
-    user= Familia(nombre='Leandra',apellido='Cobos', fecha='1994-12-17')
-    user.save()
-    userTexto= f'Nombre: {user.nombre}, Apellido: {user.apellido}, Nacimiento: {user.fecha}'
-    mihtml=open(r'C:\Users\Steffany Cobos\Desktop\python_proyecto\proyectoFinal\AppCoder\templates\padre.html')
+def inicio_view(xx):
+    user= Familia(nombre='jesus',apellido='Cobos', fecha='1994-12-17')
+    #user.save()
+    mihtml=open(r'proyectoFinal\AppCoder\templates\padre.html')
     html_read= Template(mihtml.read())
-
     mihtml.close()
     miContexto= Context(user)
     documento=html_read.render(miContexto)
     return HttpResponse(documento)
 
+
 def probandoTemplate(xx):
     user= Familia(nombre='Leandra',apellido='Cobos', fecha='1994-12-17')
-    mihtml=open(r'C:\Users\Steffany Cobos\Desktop\python_proyecto\proyectoFinal\AppCoder\templates\padre.html')
+    nombre=user.nombre
+    apellido= user.apellido
+    usuario={'nombre':nombre, 'apellido':apellido}
+    print(user)
+    mihtml=open(r'proyectoFinal\AppCoder\templates\padre.html')
     html_read= Template(mihtml.read())
-
     mihtml.close()
-    miContexto= Context(user)
+    miContexto= Context(usuario)
     documento=html_read.render(miContexto)
     return HttpResponse(documento)
  
