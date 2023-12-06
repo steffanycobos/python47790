@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Proyecto</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static '../static/assets/favicon.ico' %}" />
+        <link href="{% static '../static/css/myOwnStyle.css' %}" rel="stylesheet" />
+        <link href="{% static '../static/css/styles.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+     {%include 'navbar.html' %}
+     <div class="row gx-4 gx-lg-5 align-items-center">
+        <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="https://savvytokyo.scdn3.secure.raxcdn.com/app/uploads/2023/04/iStock-1269161360.jpg" alt="..." /></div>
+        <div class="col-lg-5">
+            <h1 class="font-weight-light" id="curly">Curly Store</h1>
+            <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
+            <a class="btn boton" href="/AppCoder/products"> Ver Productos </a>
+        </div>
+    </div>
+      
+       
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    </body>
+</html>

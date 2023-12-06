@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+li {
+  display: inline-block;
+  text-align: center;
+  margin: 20px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-family: "Inconsolata", monospace;
+  font-size: large;
+}
+
+
+#curly{
+  color: rgb(255, 157, 0);
+  font-family: "Combo";
+  font-size: 50px;
+  margin-left: 10px;
+  letter-spacing: 2px;
+  text-emphasis: none;
+  text-decoration: none;
+}
+.boton{
+    background-color: beige;
+    color: rgb(39, 33, 23);
+    
+}
+.boton:hover{
+    background-color: rgba(255, 166, 0, 0.571);
+}
+
+
+.navbar-collapse {
+  flex-basis: 100%;
+  align-items: center;
+}
