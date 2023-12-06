@@ -62,6 +62,7 @@ def index(request):  #FALLA BARRA DE BUSQUEDA
         filtro = request.GET["search"]
         print(filtro)
         products = Products.objects.filter(title__icontains=filtro)
-        return render( request, "usuario.html", {'productos':products}  )
+        print(products)
+        return render( request, "detailProduct.html", {'products':products}  )
    else:
         return HttpResponse('Envia datos pararegistrar la solicitud.')

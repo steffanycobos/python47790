@@ -36,9 +36,9 @@
                    
                  
                 </ul>
-                <form  action="{% url 'index' %}"  style="margin-right: 150px;";" class="d-flex" role="search">
-                  <input class="form-control me-2" name="search" type="search" placeholder="Buscar" aria-label="Search">
-                  <button class="btn boton" onclick= searchbar() type="submit">Buscar</button>
+                <form  action="{% url 'index' %}" method="GET"  style="margin-right: 150px;"; class="d-flex" role="search">
+                  <input class="form-control me-2" name="search" id="search" type="search" placeholder="Buscar" aria-label="Search">
+                  <button class="btn boton" type="submit">Buscar</button>
                 </form>
               </div>
             </div>
