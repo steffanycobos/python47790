@@ -1283,6 +1283,10 @@ progress {
     width: 33.33333333%;
   }
   .col-lg-5 {
+    position: absolute;
+    top: 61%;
+    left: 79%;
+    transform: translate(-50%, -50%);
     flex: 0 0 auto;
     width: 41.66666667%;
   }

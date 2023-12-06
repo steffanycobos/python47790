@@ -16,7 +16,7 @@ def creatUser(request):  #CREA UN USUARIO
     if request.method == "POST":
         form = forms.UserForm(request.POST)
         if form.is_valid():
-            #form.save()
+            form.save()
             return redirect('/AppCoder/user')
     else:
         form = forms.UserForm()
@@ -28,7 +28,7 @@ def createProducts(request):  ##CREA UN PRODUCTO
         form = forms.ProductsForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse('Validado')
+            return HttpResponse('Producto creado con éxito!')
     else:
         form = forms.ProductsForm()
     return render(request, "formProducts.html", {"form": form})
@@ -44,7 +44,7 @@ def UsuarioEncontrado(request):  ##MUESTRA LOS USUARIOS ENCONTRADOS
         usuario = Users.objects.filter(nombre__icontains=filtro)
         return render( request, "usuario.html", {"usuario": usuario}  )
     else:
-        return HttpResponse('Envia datos pararegistrar la solicitud.')
+        return HttpResponse('Envia datos para registrar la solicitud.')
 
 
 def allProduct(request):   ## MUESTRA TODOS LOS PRODUCTOS
@@ -57,12 +57,10 @@ def showUser(request):  # MUESTRA AL USUARIO LUEGO DE REGISTRARSE
     last = lusers[-1]
     return render(request,'showUser.html', {'user':last})
 
-def index(request):  #FALLA BARRA DE BUSQUEDA
+def index(request):  #BARRA DE BUSQUEDA
    if ( "search" in request.GET):
         filtro = request.GET["search"]
-        print(filtro)
         products = Products.objects.filter(title__icontains=filtro)
-        print(products)
         return render( request, "detailProduct.html", {'products':products}  )
    else:
-        return HttpResponse('Envia datos pararegistrar la solicitud.')
+        return HttpResponse('Envia datos para registrar la solicitud.')
