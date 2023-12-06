@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="{%static '../static/css/myOwnStyle.css' %}">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color:  #fbf4ccb0 ;">
             <div class="container-fluid">
               <a class="navbar-brand" id="curly" href="#">Curly Store</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +25,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                  
                     <li class="nav-item">
-                        <a class="nav-link" href="/AppCoder/inicio">Home</a>
+                        <a class="nav-link" href="/AppCoder/">Home</a>
                       </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/AppCoder/products">Productos</a>
@@ -36,7 +36,7 @@
                    
                  
                 </ul>
-                <form style="margin-right: 150px;";" class="d-flex" role="search">
+                <form  action="{% url 'index' %}"  style="margin-right: 150px;";" class="d-flex" role="search">
                   <input class="form-control me-2" name="search" type="search" placeholder="Buscar" aria-label="Search">
                   <button class="btn boton" onclick= searchbar() type="submit">Buscar</button>
                 </form>

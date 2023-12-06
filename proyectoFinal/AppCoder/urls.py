@@ -5,7 +5,7 @@ from AppCoder.views import *
 
 urlpatterns = [
    
-    path("inicio/", inicio_view),
+    path("", inicio_view),
     path("newproduct/", createProducts),
     path('newuser', creatUser, name='newUser'),
     path('buscar', findUser),

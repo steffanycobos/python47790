@@ -7,13 +7,8 @@ from . import forms
 
 
 # Create your views here.
-def inicio_view(xx):   ##INDEX
-    mihtml=open(r'proyectoFinal\AppCoder\templates\index.html')
-    html_read= Template(mihtml.read())
-    mihtml.close()
-    miContexto= Context(html_read)
-    documento=html_read.render(miContexto)
-    return HttpResponse(documento)
+def inicio_view(request):   ##INDEX
+    return render(request,'index.html')
 
 
 
@@ -63,7 +58,10 @@ def showUser(request):  # MUESTRA AL USUARIO LUEGO DE REGISTRARSE
     return render(request,'showUser.html', {'user':last})
 
 def index(request):  #FALLA BARRA DE BUSQUEDA
-    queryset =request.GET.get("search")
-    if queryset:  
-        products= Products.objects.filter(title__icontains=queryset)  # sirve para buscar el distinct sirve para traer los distintos post
-    return redirect(request, "/AppCoder/detailProduct", {'products':products})
+   if ( "search" in request.GET):
+        filtro = request.GET["search"]
+        print(filtro)
+        products = Products.objects.filter(title__icontains=filtro)
+        return render( request, "usuario.html", {'productos':products}  )
+   else:
+        return HttpResponse('Envia datos pararegistrar la solicitud.')
