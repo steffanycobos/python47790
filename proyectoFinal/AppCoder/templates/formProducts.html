@@ -6,19 +6,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static '../static/css/myOwnStyle.css' %}" rel="stylesheet" />
     <link href="{% static '../static/css/styles.css' %}" rel="stylesheet" />
     <title>Document</title>
 </head>
 
 <body>
     {%include 'navbar.html'%}
-<h1>FORMULARIO</h1>
+<h2>Registrar nuevo producto</h2>
 {% if formulario.error%}
 <p>ERROR!!</p>
 {% endif%}
 <form action="" method="POST"> {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="enviar">
+    <input type="submit" class="btn boton" value="Regristar">
 </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
