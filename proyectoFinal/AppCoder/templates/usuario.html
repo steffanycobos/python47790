@@ -11,14 +11,15 @@
     <title>Document</title>
 </head>
 
-<body>
+<body style="background-image: url(https://cdn.aarp.net/content/dam/aarp/entertainment/beauty-and-style/2020/04/1140-hair-products-on-table-esp.imgcache.rev.web.900.517.jpg); background-size:cover;">
+    
     {%include 'navbar.html' %}
+    
+        <h2  style="font-family: 'Handlee'""> Usuarios Encontrados</h2>
 
     {%if usuario%}
     {%for x in usuario%}
-
     <div class="list-group">
-
         <a href="#" class="list-group-item list-group-item-action list-group-item-warning"> <b>Usuario:</b> {{x.nombre}}
             {{x.apellido}} <b>Email:</b> {{x.email}}</a>
 

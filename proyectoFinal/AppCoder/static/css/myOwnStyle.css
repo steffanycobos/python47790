@@ -1,18 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Handlee&family=Inconsolata&family=Indie+Flower&family=Inter:wght@400;700&family=Merienda:wght@800;900&family=Space+Grotesk:wght@300&display=swap');
 li {
   display: inline-block;
   text-align: center;
   margin: 20px;
   color: rgb(0, 0, 0);
   text-decoration: none;
-  font-family: "Inconsolata", monospace;
+  font-family: "Handlee", monospace;
   font-size: large;
+  
 }
 
-
+.color{
+  color: rgb(196, 152, 72);
+}
 #curly{
-  color: rgb(255, 157, 0);
-  font-family: "Combo";
+  color: rgb(235, 174, 76);
+  font-family: "Merienda";
   font-size: 50px;
   margin-left: 10px;
   letter-spacing: 2px;
@@ -34,3 +37,27 @@ li {
   align-items: center;
 }
 
+h1{
+  font-family: 'Space Grotesk';
+  color: orange;
+
+}
+p{
+  font-family: "Handlee";
+  font-size: large}
+
+  .hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.6s;
+    transition-duration: 0.6s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+  }
+  .hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }

@@ -25,7 +25,7 @@ def creatUser(request):  #CREA UN USUARIO
 
 def createProducts(request):  ##CREA UN PRODUCTO
     if request.method == "POST":
-        form = forms.ProductsForm(request.POST)
+        form = forms.ProductsForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponse('Producto creado con éxito!')

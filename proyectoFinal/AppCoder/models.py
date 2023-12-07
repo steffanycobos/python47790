@@ -13,4 +13,4 @@ class Products(models.Model):
     description= models.CharField(max_length=100)
     price= models.IntegerField()
     stock=models.IntegerField()
-    imagen= models.ImageField(upload_to='proyectoFinal\AppCoder\productsImagen', blank=True)
+    imagen= models.ImageField(upload_to='media', blank=True)

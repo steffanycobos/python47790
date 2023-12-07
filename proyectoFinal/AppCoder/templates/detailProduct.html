@@ -11,17 +11,17 @@
     <title>Document</title>
 </head>
 
-<body>
+<body style="background-image: url(https://cdn.aarp.net/content/dam/aarp/entertainment/beauty-and-style/2020/04/1140-hair-products-on-table-esp.imgcache.rev.web.900.517.jpg); background-size:cover;">
    {% include 'navbar.html' %}
 
     {%if products%}
     {%for x in products%}
 
     <div style="margin-top:50px;" class="col-md-4 mb-5">
-        <div class="card h-100">
+        <div class="card h-100" style="background-color: rgba(255, 255, 255, 0.637)">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
-                <h2 class="card-title">{{x.title}}</h2>
+                <h2 class="card-title" style="font-family: 'Handlee';"><b>{{x.title}}</b></h2>
                 <p class="card-text">{{x.description}}</p>
                 <p class="card-text">{{x.price}}$</p>
                

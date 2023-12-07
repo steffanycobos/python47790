@@ -7,22 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{% static '../static/assets/favicon.ico' %}" />
     <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static '../static/css/myOwnStyle.css' %}" rel="stylesheet" />
     <link href="{% static '../static/css/styles.css' %}" rel="stylesheet" />
     <title>Document</title>
 </head>
-<body>
+<body
+    style="background-image: url(https://cdn.aarp.net/content/dam/aarp/entertainment/beauty-and-style/2020/04/1140-hair-products-on-table-esp.imgcache.rev.web.900.517.jpg); background-size:cover;">
+    {%include 'navbar.html'%}
     {% block content %}
-    <div class="container principal">
+   
 
-        <h1>Buscar usuario</h1>
-    <div class="card" style="width: 18rem;">
-        <div class="card-body cuerpo">
-            <form action="{% url 'UsuarioEncontrado' %}" method="GET">
-                <input type="text" name="user" id="user" >
-                <input type="submit" value="Buscar" class="btn btn-primary">
+   
+        <div style="margin-top:50px ;margin-left: 30% ;background-color: rgba(255, 255, 255, 0.637); padding: 15px;" class="col-md-4 mb-5">
+            <form action="{% url 'UsuarioEncontrado' %}" method="GET" ">
+                <h2 class="card-title" style="font-family: 'Handlee';">Buscar usuario</h2>
+                <input type="text" name="user" id="user" class="form-control">
+                <br>
+                
+                <input type="submit" value="Buscar" class="btn boton">
             </form>
-         
-        </div>
+    
       </div>
     </div>
 
