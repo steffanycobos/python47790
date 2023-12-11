@@ -1,20 +1,30 @@
 from django import forms
-
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, UserModel
 from . import models
 
+class UserCreationFormulario(UserCreationForm):
+     email = forms.EmailField()
+     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+     password2 = forms.CharField(label="Repetir contraseña", widget=forms.PasswordInput)
+     avatar= forms.ImageField(label='Imagen',widget=forms.FileInput)
 
-class UserForm(forms.ModelForm):
+     class Meta:
+        model = UserModel
+        fields = ["username", "email","password1", "password2",'avatar' ]
+        help_texts = {k: "" for k in fields}
+      
+class UserEditionFormulario(UserChangeForm):
+    email = forms.EmailField()
+    first_name = forms.CharField(label="Nombre", widget=forms.PasswordInput)
+    last_name = forms.CharField(label="Apellido", widget=forms.PasswordInput)
+    password = None
+
     class Meta:
-        model = models.Users
-        fields = ["nombre", "apellido", "email", "password"]
-        widgets={
-            'nombre': forms.TextInput(attrs={'class':'form-control'}),
-            'apellido': forms.TextInput(attrs={'class':'form-control'}),
-            'email':forms.EmailInput(attrs={'class':'form-control'}),
-            'password':forms.PasswordInput(attrs={'class':'form-control'})
-        }
-    
+        model = UserModel
+        fields = ["email", "first_name", "last_name"]
+        help_texts = {k: "" for k in fields}
 
+        
 
 class ProductsForm(forms.ModelForm):
     class Meta:
@@ -28,4 +38,5 @@ class ProductsForm(forms.ModelForm):
             'imagen': forms.FileInput(attrs={'class':'form-control', 'id':'formFile'})
     
         }
+    
     

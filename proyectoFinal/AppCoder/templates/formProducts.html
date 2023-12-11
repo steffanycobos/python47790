@@ -19,8 +19,8 @@
     {% endif%}
     <div style="margin-top:50px ;margin-left: 30%" class="col-md-4 mb-5">
         <form action="" method="POST" style="background-color: rgba(255, 255, 255, 0.637); padding: 15px;"
-            enctype=«multipart/form-data»> {% csrf_token %} <h2 class="card-title" style="font-family: 'Handlee';">
-            Registra nuevo producto</h2>
+        enctype="multipart/form-data">  <h2 class="card-title" style="font-family: 'Handlee';">
+            Registra nuevo producto</h2> {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" class="btn boton" value="Regristar">
         </form>

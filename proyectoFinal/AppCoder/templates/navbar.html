@@ -34,7 +34,10 @@
             <a class="nav-link color" href="/AppCoder/products">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link color " href="/AppCoder/newuser">Inicia Sesión</a>
+            <a class="nav-link color " href="/AppCoder/login">Inicia Sesión</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link color " href="#">{{user.username}}</a>
           </li>
         </ul>
         <form action="{% url 'index' %}" method="GET" style="margin-right: 150px;" ; class="d-flex" role="search">

@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('description', models.CharField(max_length=100)),
                 ('price', models.CharField(max_length=15)),
                 ('stock', models.IntegerField()),
-                ('imagen', models.ImageField(upload_to='../AppCoder/productsImagen')),
+                ('imagen', models.ImageField(upload_to='media')),
             ],
         ),
         migrations.CreateModel(
