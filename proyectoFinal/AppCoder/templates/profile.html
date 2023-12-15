@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static '../static/css/myOwnStyle.css' %}" rel="stylesheet" />
+    <link href="{% static '../static/css/styles.css' %}" rel="stylesheet" />
+    <title>Document</title>
+</head>
+
+<body 
+style="background-image: url(https://cdn.aarp.net/content/dam/aarp/entertainment/beauty-and-style/2020/04/1140-hair-products-on-table-esp.imgcache.rev.web.900.517.jpg); background-size:cover;">
+{%include 'navbar.html' %}
+    
+<div style="margin-top:50px ;margin-left: 30%" class="col-md-4 mb-5">
+<form action=""  method="POST" enctype="multipart/form-data" style="background-color: rgba(255, 255, 255, 0.637); padding: 15px;">
+   <h2>Hola {{user}}!</h2> 
+  
+   <h6>Ingresa una foto para tu perfil</h6>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Enviar" class="btn boton">
+</form>
+</div>
+   </body>
+ 

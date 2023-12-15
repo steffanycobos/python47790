@@ -27,19 +27,20 @@
                         <p class="card-text">{{x.price}}$</p>
                     </div>
                     <div class="card-footer">
-                        {% if request.user.is_superuser %}
-                        <a href="/AppCoder/detailProduct/{{x.id}}" class="btn boton btn-sm">Ver más</a>
+                        <a class="btn boton btn-sm" href="#!">Comprar</a>
                         <a href="/AppCoder/delete/{{x.id}}" class="btn boton btn-sm">Eliminar</a>
                         <a href="/AppCoder/editarProducto/{{x.id}}" class="btn boton btn-sm">Editar</a>
-                        {% else %}
-                        <a href="/AppCoder/detailProduct/{{x.id}}" class="btn boton btn-sm">Ver más</a>
-                        {% endif %}
                     </div>
                 </div>
             </div>
 
             {%endfor%}
-
+            {% else %}
+            <div class="container px-4 px-lg-5" style="background-color: rgba(255, 255, 255, 0.637); margin-top: 20px; margin-left: 30px; margin-right: 30px;">
+            <h2 style="font-family: 'Handlee';" class="card-title"><b>No existen productos con ese nombre :( </b></h2>
+            <a href="/AppCoder/products" class="btn boton btn-sm">Ver productos disponibles</a>
+           
+            </div>
             {%endif%}
 
 

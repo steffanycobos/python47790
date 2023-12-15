@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static '../static/css/myOwnStyle.css' %}" rel="stylesheet" />
+    <link href="{% static '../static/css/styles.css' %}" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body  style="background-image: url(https://cdn.aarp.net/content/dam/aarp/entertainment/beauty-and-style/2020/04/1140-hair-products-on-table-esp.imgcache.rev.web.900.517.jpg); background-size:cover;">
+   
+        {%include 'navbar.html' %}
+        <div class="card mb-3" style=" background-color: rgba(255, 255, 255, 0.637); margin-left: 15%; margin-top: 20px; margin-right: 15%;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="/media/media/IMG_8563.jpg" class="card-img" alt="..." style="border-radius: 150px; margin-left: 70px;">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body"  style=" margin-left: 25px;">
+                  <h2 class="card-title">Steffany Cobos</h2>
+                  <p class="card-text"> Nací en Venezuela y tengo 28 años. Viví los últimos 8 años en la Ciudad de México y hace dos meses en Santiago de Chile. Estudíe 6 semestres de Ing. Metalúrgica y por la situación de mi pais emigré. Trabajo como modelo desde los 14 años, y hace dos años estudio una Licenciatura en Sistemas Computacionales y terminé la carrera en Full Stack en Coderhouse hace unos meses.</p>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

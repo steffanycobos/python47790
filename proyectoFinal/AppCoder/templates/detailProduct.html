@@ -11,32 +11,23 @@
     <title>Document</title>
 </head>
 
-<body style="background-image: url(https://cdn.aarp.net/content/dam/aarp/entertainment/beauty-and-style/2020/04/1140-hair-products-on-table-esp.imgcache.rev.web.900.517.jpg); background-size:cover;">
-   {% include 'navbar.html' %}
+<body
 
-    {%if products%}
-    {%for x in products%}
-
-    <div style="margin-top:50px;" class="col-md-4 mb-5">
-        <div class="card h-100" style="background-color: rgba(255, 255, 255, 0.637)">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h2 class="card-title" style="font-family: 'Handlee';"><b>{{x.title}}</b></h2>
-                <p class="card-text">{{x.description}}</p>
-                <p class="card-text">{{x.price}}$</p>
-               
+    style="background-image: url(https://cdn.aarp.net/content/dam/aarp/entertainment/beauty-and-style/2020/04/1140-hair-products-on-table-esp.imgcache.rev.web.900.517.jpg); background-size:contain;">
+    {%include 'navbar.html' %}
+    <div class="card mb-3" style="max-width: 540px; background-color: rgba(255, 255, 255, 0.637); margin-left: 30%; margin-top: 20px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="/media/{{product.imagen}}" class="img-fluid rounded-start" alt="..." style="margin-top: 50px; margin-left: 25px;">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body"  style=" margin-left: 25px;">
+              <h5 class="card-title">{{product.title}}</h5>
+              <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique voluptatum soluta amet, iure voluptatibus sed labore voluptas, minima blanditiis eum ipsam assumenda delectus id nobis qui omnis, sapiente molestias obcaecati.</p>
+              <p>{{product.price}}$</p>
+              <a href="/AppCoder/products" class="btn boton btn-sm">Volver</a>
             </div>
-            <div class="card-footer"><a class="btn boton btn-sm" href="#!">Comprar</a></div>
+          </div>
         </div>
-    </div>
-   
-    {%endfor%}
-
-    {%endif%}
-
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+      </div>
 </body>
-
-</html>
-    

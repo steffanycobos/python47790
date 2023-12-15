@@ -3,9 +3,10 @@ from django.http import HttpResponse
 from django.contrib.auth.models import auth
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from AppCoder.models import *
+from .forms import ProductsForm, UserCreationFormulario, UserEditionFormulario, ProductEditionFormulario, AvatarForm
 from . import forms
-from .forms import ProductsForm, UserCreationFormulario, UserEditionFormulario
 
 
 
@@ -39,6 +40,41 @@ def creatUser(request):  #CREA UN USUARIO
                 "formUser.html",
                 {"form": formulario}
             )
+        
+def profile(request):
+    if request.method=='POST':
+        form= AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            usuario=User.objects.get(username=request.user)
+            avatar= Avatar(user=usuario, imagen=form.cleaned_data['avatar'])
+            avatar.save()
+            return render(request,'index.html')
+        else:
+            return HttpResponse(form.errors)
+    else:
+        usuario=request.user
+        avatares=Avatar.objects.filter(user=request.user.id)
+        form=AvatarForm()
+        return render(request,'profile.html',{'form':form, 'user':usuario, 'url':avatares[0].imagen.url})
+
+
+
+@login_required
+def editUser(request):
+    usuario=request.user
+    if (request.method=='POST'):
+        form= UserEditionFormulario(request.POST)
+        if form.is_valid():
+            info= form.cleaned_data
+            usuario.username=info['username']
+            usuario.email=info['email']
+            usuario.password1=info['password1']
+            usuario.password1=info['password2']
+            usuario.save()
+            return HttpResponse('Usuario editado con éxito')
+    else:
+        form= UserEditionFormulario(initial={'email':usuario.email})
+        return render(request, 'editUser.html', {'form':form, 'usuario':usuario})
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -68,9 +104,8 @@ def login_view(request):
 
             return render(
                 request,
-                "index.html",
-                {"mensaje": f"Bienvenido {modelo.username}"}
-            )
+                "index.html")
+            
         else:
             return render(
                 request,
@@ -78,10 +113,12 @@ def login_view(request):
                 {"form": formulario}
             )
 
-        
+
+
+@login_required
 def createProducts(request):  ##CREA UN PRODUCTO
+    form = forms.ProductsForm(request.POST,request.FILES)
     if request.method == "POST":
-        form = forms.ProductsForm(request.POST,files=request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponse('Producto creado con éxito!')
@@ -89,35 +126,43 @@ def createProducts(request):  ##CREA UN PRODUCTO
         form = forms.ProductsForm()
     return render(request, "formProducts.html", {"form": form})
 
+@login_required
+def editProduct(request, product_id):
+    product=Products.objects.filter(id=product_id).first()
+    if request.method=='POST':
+        formulario= ProductEditionFormulario(request.POST, request.FILES)
+        if formulario.is_valid():
+            info= formulario.cleaned_data
+            product.title= info['title']
+            product.descripticion= info['description']
+            product.price=info['price']
+            product.stock=info['stock']
+            product.imagen=info['imagen']
+            product.save()
+
+            return render(request, 'allProducts.htmls')
+        else:
+            return HttpResponse(formulario.errors)
+        
+    else:
+        formulario= ProductEditionFormulario(initial={'title':product.title, 'description':product.description, 'price':product.price,'stock':product.stock, 'imagen':product.imagen})
+        return render(request, 'editProduct.html',{'form':formulario, 'id':product.id})
+   
+
 def allProduct(request):   ## MUESTRA TODOS LOS PRODUCTOS
     products= Products.objects.all()
     return render(request,'allProducts.html', {'products':products}) 
 
+def detailProduct(request, product_id):
+    product=Products.objects.filter(id=product_id).first()
+    return render(request, 'detailProduct.html',{'product':product})
 
-def findUser(request):  
-    return render(request, "findUser.html")
-
-def UsuarioEncontrado(request):  ##MUESTRA LOS USUARIOS ENCONTRADOS
-    if ( "user" in request.GET):
-        filtro = request.GET["user"]
-        print(filtro)
-        usuario = Users.objects.filter(nombre__icontains=filtro)
-        return render( request, "usuario.html", {"usuario": usuario}  )
-    else:
-        return HttpResponse('Envia datos para registrar la solicitud.')
-
-
-def showUser(request):  # MUESTRA AL USUARIO LUEGO DE REGISTRARSE
-    users = Users.objects.all()
-    lusers = list(users) 
-    last = lusers[-1]
-    return render(request,'showUser.html', {'user':last})
 
 def index(request):  #BARRA DE BUSQUEDA
    if ( "search" in request.GET):
         filtro = request.GET["search"]
         products = Products.objects.filter(title__icontains=filtro)
-        return render( request, "detailProduct.html", {'products':products}  )
+        return render( request, "productSearch.html", {'products':products}  )
    else:
         return HttpResponse('Envia datos para registrar la solicitud.')
 
@@ -125,3 +170,6 @@ def products_delete(request, product_id):
     product_delete= Products.objects.filter(id=product_id).first()
     product_delete.delete()
     return allProduct(request)
+
+def aboutme(request):
+    return render(request,'aboutme.html')

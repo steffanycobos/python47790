@@ -61,3 +61,12 @@ p{
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
+
+
+.card-img {
+  height: 250px;
+
+  width: 250px;
+  
+  object-fit: cover;
+}
