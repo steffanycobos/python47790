@@ -29,15 +29,15 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           <li class="nav-item">
-            <a class="nav-link color" href="/AppCoder/" style="font-size: larger;">Home</a>
+            <a class="nav-link color" href="{% url 'inicio' %}" style="font-size: larger;">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link color" href="/AppCoder/products" style="font-size: larger;">Productos</a>
+            <a class="nav-link color" href="{% url 'allProducts' %}" style="font-size: larger;">Productos</a>
           </li>
         
           {% if not request.user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link color " href="/AppCoder/login" style="font-size: larger;">Inicia Sesión</a>
+            <a class="nav-link color " href="{% url 'login' %}" style="font-size: larger;">Inicia Sesión</a>
           </li>
           
           {% else %}
@@ -46,14 +46,14 @@
              {{user.username}}
             </a>
             <ul class="dropdown-menu" style="background-color:  #0719395a ;">
-              <li><a class="dropdown-item color" href="/AppCoder/editarPerfil" style="font-size: larger;">Editar Perfil</a></li>
+              <li><a class="dropdown-item color" href="{% url 'editUser' %}" style="font-size: larger;">Editar Perfil</a></li>
               <li><a class="dropdown-item color" href="/AppCoder/logout" style="font-size: larger;">Cerrar Sesión</a></li>
             </ul>
           </li>
          
           {% endif %}
           <li class="nav-item">
-            <a class="nav-link color" href="/AppCoder/aboutme" style="font-size: larger;">About Me</a>
+            <a class="nav-link color" href="{% url 'aboutme' %}" style="font-size: larger;">About Me</a>
           </li>
         </ul>
 

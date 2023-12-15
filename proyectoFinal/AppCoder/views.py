@@ -4,8 +4,9 @@ from django.contrib.auth.models import auth
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from AppCoder.models import *
-from .forms import ProductsForm, UserCreationFormulario, UserEditionFormulario, ProductEditionFormulario, AvatarForm
+from .forms import UserCreationFormulario, UserEditionFormulario, ProductEditionFormulario, AvatarForm
 from . import forms
 
 
@@ -17,31 +18,20 @@ def inicio_view(request):   ##INDEX
 
 def creatUser(request):  #CREA UN USUARIO
        if request.method == "GET":
-        return render(
-            request,
-            "formUser.html",
-            {"form": UserCreationFormulario()}
-        )
+        return render(request, "formUser.html", {"form": UserCreationFormulario()})
        else:
         formulario = UserCreationFormulario(request.POST,request.FILES)
         if formulario.is_valid():
             informacion = formulario.cleaned_data
             usuario = informacion["username"]
+            messages.success(request,'Usuario creado con éxito!')
             formulario.save()
-
-            return render(
-                request,
-                "index.html",
-                {"mensaje": f"Usuario creado: {usuario}"}
-            )
+            return render(request,"index.html" )
+       
         else:
-            return render(
-                request,
-                "formUser.html",
-                {"form": formulario}
-            )
+            return render(  request,   "formUser.html",  {"form": formulario} )
         
-def profile(request):
+def profile(request): ##PERFIL DEL USURIO
     if request.method=='POST':
         form= AvatarForm(request.POST, request.FILES)
         if form.is_valid():
@@ -60,7 +50,7 @@ def profile(request):
 
 
 @login_required
-def editUser(request):
+def editUser(request): ##EDITAR USUARIO
     usuario=request.user
     if (request.method=='POST'):
         form= UserEditionFormulario(request.POST)
@@ -76,7 +66,7 @@ def editUser(request):
         form= UserEditionFormulario(initial={'email':usuario.email})
         return render(request, 'editUser.html', {'form':form, 'usuario':usuario})
 
-def login_view(request):
+def login_view(request): ##LOGIN DE USUARIO
     if request.user.is_authenticated:
         print('ya esta')
         return render(
@@ -121,13 +111,15 @@ def createProducts(request):  ##CREA UN PRODUCTO
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            return HttpResponse('Producto creado con éxito!')
+            messages.success(request,'Producto creado con éxito!')
+            return render(request, 'allProducts.html')
     else:
         form = forms.ProductsForm()
+        messages.success(request,'Producto creado con éxito!')
     return render(request, "formProducts.html", {"form": form})
 
 @login_required
-def editProduct(request, product_id):
+def editProduct(request, product_id): #EDITAR PRODUCTO
     product=Products.objects.filter(id=product_id).first()
     if request.method=='POST':
         formulario= ProductEditionFormulario(request.POST, request.FILES)
@@ -153,7 +145,7 @@ def allProduct(request):   ## MUESTRA TODOS LOS PRODUCTOS
     products= Products.objects.all()
     return render(request,'allProducts.html', {'products':products}) 
 
-def detailProduct(request, product_id):
+def detailProduct(request, product_id): #DETALLE DE PRODUCTO
     product=Products.objects.filter(id=product_id).first()
     return render(request, 'detailProduct.html',{'product':product})
 
@@ -166,10 +158,10 @@ def index(request):  #BARRA DE BUSQUEDA
    else:
         return HttpResponse('Envia datos para registrar la solicitud.')
 
-def products_delete(request, product_id):
+def products_delete(request, product_id): ## ELIMINAR PRODUCTO
     product_delete= Products.objects.filter(id=product_id).first()
     product_delete.delete()
     return allProduct(request)
 
-def aboutme(request):
+def aboutme(request): 
     return render(request,'aboutme.html')
