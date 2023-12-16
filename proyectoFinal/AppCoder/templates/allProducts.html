@@ -27,13 +27,13 @@
                         <p class="card-text">{{x.price}}$</p>
                     </div>
                     <div class="card-footer">
-                        {% if request.user.is_superuser %}
+                        
                         <a href="/AppCoder/detailProduct/{{x.id}}" class="btn boton btn-sm">Ver más</a>
                         <a href="/AppCoder/delete/{{x.id}}" class="btn boton btn-sm">Eliminar</a>
                         <a href="/AppCoder/editarProducto/{{x.id}}" class="btn boton btn-sm">Editar</a>
                         {% else %}
                         <a href="/AppCoder/detailProduct/{{x.id}}" class="btn boton btn-sm">Ver más</a>
-                        {% endif %}
+                     
                     </div>
                 </div>
             </div>
