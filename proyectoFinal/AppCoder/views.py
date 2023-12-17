@@ -49,7 +49,7 @@ def profile(request): ##PERFIL DEL USURIO
 
 
 
-@login_required
+
 def editUser(request): ##EDITAR USUARIO
     usuario=request.user
     if (request.method=='POST'):
@@ -105,20 +105,19 @@ def login_view(request): ##LOGIN DE USUARIO
 
 
 
-@login_required
+
 def createProducts(request):  ##CREA UN PRODUCTO
     form = forms.ProductsForm(request.POST,request.FILES)
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            messages.success(request,'Producto creado con éxito!')
             return render(request, 'allProducts.html')
     else:
         form = forms.ProductsForm()
         messages.success(request,'Producto creado con éxito!')
     return render(request, "formProducts.html", {"form": form})
 
-@login_required
+
 def editProduct(request, product_id): #EDITAR PRODUCTO
     product=Products.objects.filter(id=product_id).first()
     if request.method=='POST':
@@ -126,7 +125,7 @@ def editProduct(request, product_id): #EDITAR PRODUCTO
         if formulario.is_valid():
             info= formulario.cleaned_data
             product.title= info['title']
-            product.descripticion= info['description']
+            product.description= info['description']
             product.price=info['price']
             product.stock=info['stock']
             product.imagen=info['imagen']
