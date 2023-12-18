@@ -8,12 +8,21 @@ from django.contrib import messages
 from AppCoder.models import *
 from .forms import UserCreationFormulario, UserEditionFormulario, ProductEditionFormulario, AvatarForm
 from . import forms
-
+from tkinter import messagebox
 
 
 # Create your views here.
+
 def inicio_view(request):   ##INDEX
-    return render(request,'index.html')
+      if request.user.is_authenticated:
+        usuario = request.user
+        avatar = Avatar.objects.filter(user=usuario).first()
+        avatar_url = avatar.imagen.url if avatar is not None else ""
+      else:
+       avatar_url = ""
+
+      return render(request, "index.html",context= {'avatar_url':avatar_url})
+
 
 
 def creatUser(request):  #CREA UN USUARIO
@@ -24,34 +33,36 @@ def creatUser(request):  #CREA UN USUARIO
         if formulario.is_valid():
             informacion = formulario.cleaned_data
             usuario = informacion["username"]
-            messages.success(request,'Usuario creado con éxito!')
             formulario.save()
-            return render(request,"index.html" )
+            return redirect ("/AppCoder/profile")
        
         else:
             return render(  request,   "formUser.html",  {"form": formulario} )
-        
+@login_required 
 def profile(request): ##PERFIL DEL USURIO
-    if request.method=='POST':
-        form= AvatarForm(request.POST, request.FILES)
-        if form.is_valid():
-            usuario=User.objects.get(username=request.user)
-            avatar= Avatar(user=usuario, imagen=form.cleaned_data['avatar'])
-            avatar.save()
-            return render(request,'index.html')
-        else:
-            return HttpResponse(form.errors)
-    else:
-        usuario=request.user
-        avatares=Avatar.objects.filter(user=request.user.id)
-        form=AvatarForm()
-        return render(request,'profile.html',{'form':form, 'user':usuario, 'url':avatares[0].imagen.url})
+    usuario = request.user
 
+    if request.method == "GET":
+        formulario = AvatarForm()
+        return render(
+            request,
+            "profile.html",
+            context={"form": formulario, "usuario": usuario}
+        )
+    else:
+        formulario = AvatarForm(request.POST, request.FILES)
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            modelo = Avatar(user=usuario, imagen=informacion["avatar"])
+            modelo.save()
+            
+            return redirect("/AppCoder")
 
 
 
 def editUser(request): ##EDITAR USUARIO
     usuario=request.user
+    
     if (request.method=='POST'):
         form= UserEditionFormulario(request.POST)
         if form.is_valid():
@@ -61,15 +72,17 @@ def editUser(request): ##EDITAR USUARIO
             usuario.password1=info['password1']
             usuario.password1=info['password2']
             usuario.save()
-            return HttpResponse('Usuario editado con éxito')
+            return redirect('/AppCoder/profile')
+        else:
+            return HttpResponse(f' Error en: {form.errors}')
     else:
         form= UserEditionFormulario(initial={'email':usuario.email})
         return render(request, 'editUser.html', {'form':form, 'usuario':usuario})
 
 def login_view(request): ##LOGIN DE USUARIO
     if request.user.is_authenticated:
-        print('ya esta')
-        return render(
+       
+     return render(
             request,
             "index.html",
             {"mensaje": f"Ya estás autenticado: {request.user.username}"}
@@ -104,17 +117,15 @@ def login_view(request): ##LOGIN DE USUARIO
             )
 
 
-
-
 def createProducts(request):  ##CREA UN PRODUCTO
     form = forms.ProductsForm(request.POST,request.FILES)
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            return render(request, 'allProducts.html')
+            messages.success(request,'Producto creado con éxito!')
+            return redirect('/AppCoder/products')
     else:
         form = forms.ProductsForm()
-        messages.success(request,'Producto creado con éxito!')
     return render(request, "formProducts.html", {"form": form})
 
 
@@ -131,7 +142,7 @@ def editProduct(request, product_id): #EDITAR PRODUCTO
             product.imagen=info['imagen']
             product.save()
 
-            return render(request, 'allProducts.htmls')
+            return render(request, 'allProducts.html')
         else:
             return HttpResponse(formulario.errors)
         
@@ -142,11 +153,26 @@ def editProduct(request, product_id): #EDITAR PRODUCTO
 
 def allProduct(request):   ## MUESTRA TODOS LOS PRODUCTOS
     products= Products.objects.all()
-    return render(request,'allProducts.html', {'products':products}) 
+    if request.user.is_authenticated:
+        usuario = request.user
+        avatar = Avatar.objects.filter(user=usuario).first()
+        avatar_url = avatar.imagen.url if avatar is not None else ""
+     
+    else:
+       avatar_url = ""
+
+    return render(request,'allProducts.html', {'products':products,"avatar_url": avatar_url}) 
 
 def detailProduct(request, product_id): #DETALLE DE PRODUCTO
     product=Products.objects.filter(id=product_id).first()
-    return render(request, 'detailProduct.html',{'product':product})
+    usuario=request.user
+    if request.user.is_authenticated:
+        usuario = request.user
+        avatar = Avatar.objects.filter(user=usuario).first()
+        avatar_url = avatar.imagen.url if avatar is not None else ""
+    else:
+       avatar_url = ""
+    return render(request, 'detailProduct.html',{'product':product,'avatar_url':avatar_url})
 
 
 def index(request):  #BARRA DE BUSQUEDA
@@ -163,4 +189,11 @@ def products_delete(request, product_id): ## ELIMINAR PRODUCTO
     return allProduct(request)
 
 def aboutme(request): 
-    return render(request,'aboutme.html')
+    usuario=request.user
+    if request.user.is_authenticated:
+        usuario = request.user
+        avatar = Avatar.objects.filter(user=usuario).first()
+        avatar_url = avatar.imagen.url if avatar is not None else ""
+    else:
+       avatar_url = ""
+    return render(request,'aboutme.html', {'avatar_url':avatar_url})
