@@ -45,8 +45,9 @@
             <a class="nav-link color dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: larger;">
              {{user.username}}   <img src="{{ avatar_url }}"  width="40" height="30">
             </a>
-            <ul class="dropdown-menu" style="background-color:  #0719395a ;">
+            <ul class="dropdown-menu" style="background-color:  #071939c7 ;">
               <li><a class="dropdown-item color" href="{% url 'editUser' %}" style="font-size: larger;">Editar Perfil</a></li>
+              <li><a class="dropdown-item color" href="{% url 'profile' %}" style="font-size: larger;">Agregar Avatar</a></li>
               <li><a class="dropdown-item color" href="/AppCoder/logout" style="font-size: larger;">Cerrar Sesión</a></li>
             </ul>
           </li>

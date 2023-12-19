@@ -1,6 +1,9 @@
-# Hola! Esta es la 3ra Preentrega de mi proyecto para el curso de CoderHouse "PYTHON"
+# Hola! Este el Proyecto Final para el curso de"PYTHON" de CoderHouse 
 ## Nombre:
 STEFFANY LEANDRA COBOS RODRIGUEZ
+
+Intenté hacer una página de compra en donde el usuario registrado y logueado(que podria ser el dueño de la tienda) tiene la opción de editar, eliminar y crear nuevos productos. El usuario también puede agregar un avatar a su perfil(que se ve en el navbar) y editar su username, email y contraseñas. 
+
 ## Utilicé:
  PYTHON, DJANGO
 
@@ -20,5 +23,5 @@ git clone https://github.com/steffanycobos/python47790.git
 ` 
 
 3. Run the app
-`py proyectoFinal\manage.py runserver`
+`py proyectoFinal/manage.py runserver`
 

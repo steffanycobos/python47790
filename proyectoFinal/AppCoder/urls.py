@@ -1,5 +1,4 @@
 from django.urls import path
-from django.http import HttpResponse
 from AppCoder.views import *
 from django.contrib.auth.views import LogoutView
 
@@ -8,7 +7,7 @@ urlpatterns = [
    
     path("", inicio_view, name='inicio'),
     path('products', allProduct, name='allProducts'),
-    path("newproduct/", createProducts),
+    path("newproduct/", createProducts, name='newproduct'),
     path('editarProducto/<product_id>', editProduct, name='editProduct'),
     path('productSearch',index, name='index'),
     path('detailProduct/<product_id>',detailProduct, name='detailProduct'),

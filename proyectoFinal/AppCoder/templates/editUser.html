@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,7 @@
     style="background-image: url(https://cdn.aarp.net/content/dam/aarp/entertainment/beauty-and-style/2020/04/1140-hair-products-on-table-esp.imgcache.rev.web.900.517.jpg); background-size:cover;">
     {%include 'navbar.html'%}
     <div style="margin-top:50px ;margin-left: 30%" class="col-md-4 mb-5">
-        <form method="POST" style="background-color: rgba(255, 255, 255, 0.637); padding: 15px;" class="form-"> {% csrf_token %}
+        <form method="POST" style="background-color: rgba(255, 255, 255, 0.637); padding: 15px;" class="form-" enctype="multipart/form-data"> {% csrf_token %}
             <h2 class="card-title" style="font-family: 'Handlee';">Edita tu Perfil</h2>
          {{form.as_p}}
         <input type="submit" value="Editar" class="boton btn">

@@ -27,7 +27,7 @@ class UserEditionFormulario(UserCreationForm):
         help_texts = {k: "" for k in fields}
 
         
-from django.utils.timezone import now
+
 class ProductsForm(forms.ModelForm):
     class Meta:
         model = models.Products
